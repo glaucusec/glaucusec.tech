@@ -1,0 +1,149 @@
+---
+title: "ASN Lookups"
+description: "This blog post contains a brief introduction to ASN, how we can increase the attack surface from ASN lookup, and the various ways of performing ASN lookups."
+date: "2022-07-29"
+tags: [asn, recon]
+---
+
+This blog post contains a brief introduction to **ASN**, how we can increase the attack surface from ASN lookup, and the various ways of performing ASN lookups.
+
+## ASN
+
+An ASN (Autonomous System Network) is a large group of networks. Every computer on the internet is connected to an ASN. The working of an ASN is similar to a town's post office: mail travels from one post office to another until it reaches the correct town's post office, which then delivers it to the recipient.
+
+Every ASN controls a specific set of IP ranges, known as its IP address space. An ASN uses a protocol called BGP for routing.
+
+## ASN Number
+
+Each ASN is assigned a number. It can be a unique 16-bit number between 1 and 65,534, or a 32-bit number. ASN numbers are typically formatted as AS(number). As the internet evolved, the number of ASNs increased—currently, there are over 9,000 ASNs worldwide.
+
+## BGP
+
+BGP is called Border Gateway Protocol. AS es communicate with other AS es using the procotol BGP. BGP helps to route the packets across AS. Without BGP protocol operating internet is harder. It can take too much time for the packets to go from one node to another.
+Each As uses BGP to announce the IP address they are in control. BGP routers take this information and builds a routing table, which will be used to determine the fasterst path from one AS to another.
+Here IP address is not enough for the routing of packets. IP address is to identify the destination node whereas BGP is used to identify the fastest route possible to reach the destination.
+
+Now, let’s jump into the intersting part. **ASN lookup**
+
+## ASN Lookup Strategies
+
+1.
+
+We need an IP address to gather the ASN number in which the IP is under. We can use the dig command to map domain name to IP address.
+
+![output of running `dig` command](/blog-images/dig-command-output1.webp)
+
+2.
+
+The whois lookup may not give you wide range of infomation. There are a lot of automated tools available to get the job done.
+
+- There is an nmap script availble to find IP ranges that belongs to an ASN. [read more](https://nmap.org/nsedoc/scripts/targets-asn.html)
+
+```
+➜ nmap --script targets-asn --script-args targets-asn.asn=16509
+Starting Nmap 7.92 ( https://nmap.org ) at 2022-06-08 00:30 EDT
+Pre-scan script results:
+| targets-asn:
+|   16509
+|     2.255.190.0/24
+|     2.255.191.0/24
+|     3.0.0.0/15
+|     3.2.0.0/24
+|     3.2.2.0/24
+|     3.2.3.0/24
+.....
+```
+
+- asn is an amazing tool written in bash which can be used to perform various operation such as ASN / RPKI validity / BGP stats / IPv4v6 / Prefix / ASPath / Organization / IP reputation / IP geolocation / IP fingerprinting / Network recon / lookup tool / Web traceroute server. It will even query shodan for data about target.
+  Visit [Github Repo](https://github.com/nitefood/asn) here for more information.
+
+```
+➜ asn github.com
+
+────────────────────────────────────────────────────────────
+			WARNING
+
+No IPQualityScore token found, so disabling in-depth threat
+analysis and IP reputation lookups. Please visit
+https://github.com/nitefood/asn#ip-reputation-api-token
+for instructions on how to enable it.
+────────────────────────────────────────────────────────────
+
+╭───────────────────────────╮
+│ ASN lookup for github.com │
+╰───────────────────────────╯
+
+- Resolving "github.com"... 2 IP addresses found:
+
+
+     13.234.210.38 ┌PTR ec2-13-234-210-38.ap-south-1.compute.amazonaws.com
+                   ├ASN 16509 (AMAZON-02, US)
+                   ├ORG Amazon Data Services India
+                   ├NET 13.232.0.0/14 (AMAZON-BOM)
+                   ├ABU abuse@amazonaws.com
+                   ├ROA ✓ VALID (3 ROAs found)
+                   ├TYP  Hosting/DC
+                   ├GEO Mumbai, Maharashtra (IN)
+                   ├POR Open ports: 22, 80, 443
+                   ├TAG  cloud
+                   └REP ✓  KNOWN GOOD as "Github"
+```
+
+3.
+
+We discussed that ASN contains a wide range of IPv4 and v6 subnets. There is a github repo which contains all the IP subnets under a AS. We can query this database by using the ASN number. Repo can be found [here](https://github.com/ipverse/asn-ip)
+
+**Usage**
+
+To download the announced subnets for a specific autonomous system (AS1234 IPv4 adresses in this example), try:
+
+![output of running `asn github` command](/blog-images/asn-github-repo.webp)
+
+The same for all IPv6 subnets from AS8075:
+
+![output of running `gom watch` command](/blog-images/asn-github-ipv6.webp)
+
+The data (IPv4 + IPv6 combined) is available in JSON format as well:
+
+![output of running `gom watch` command](/blog-images/asn-github-ipv46.webp)
+
+4.
+
+**RIR’s API**
+
+RIPEstat is a large-scale information service and the open data platform of the RIPE NCC. Get essential information on IP address space and Autonomous System Numbers (ASNs) along with related statistics on specific hostnames and countries. Learn more about RIPEstat API here.
+We can gather the data using their API provided. A quick overview of an ASN can be done using
+
+```
+https://stat.ripe.net/data/as-overview/data.json?resource=AS16509
+```
+
+Which returns
+
+![output of running `gom watch` command](/blog-images/stat.ripe.webp)
+
+**BGPView API**
+
+Another API available is BGPView. BGPView is a great AS analysis tool which help us retrieve ASN information quickly from their powerful API.
+A quick api search like the following
+
+```
+https://api.bgpview.io/asn/16509
+```
+
+will return
+
+```
+{"status":"ok","status_message":"Query was successful","data":{"asn":16509,"name":"AMAZON-02","description_short":"Amazon.com, Inc.","description_full":["Amazon.com, Inc."],"country_code":"US","website":"http:\/\/www.amazon.com","email_contacts":["amzn-noc-contact@amazon.com","aws-rpki-routing-poc@amazon.com","abuse@amazonaws.com","aws-routing-poc@amazon.com","ipmanagement@amazon.com"],"abuse_contacts":["abuse@amazonaws.com"],"looking_glass":null,"traffic_estimation":null,"traffic_ratio":"Balanced","owner_address":["1918 8th Ave","SEATTLE","WA","98101-1244","US"],"rir_allocation":{"rir_name":"ARIN","country_code":"US","date_allocated":"2000-05-04 00:00:00","allocation_status":"assigned"},"iana_assignment":{"assignment_status":"assigned","description":"Assigned by ARIN","whois_server":"whois.arin.net","date_assigned":null},"date_updated":"2022-05-30 05:11:21"},"@meta":{"time_zone":"UTC","api_version":1,"execution_time":"21.91 ms"}}
+
+```
+
+5.
+
+There are a lot of web based ASN lookup tools available.
+
+- https://iptoasn.com/ — IPtoASN is another ASN Lookup resource that can help you get all the ASN data from any company in a really fast way.
+- https://asn.cymru.com/cgi-bin/whois.cgi
+- https://mxtoolbox.com/asn.aspx
+- https://hackertarget.com/as-ip-lookup/
+- https://www.bigdatacloud.com/asn-lookup/

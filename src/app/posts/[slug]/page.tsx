@@ -48,14 +48,14 @@ export async function generateMetadata({
   return {
     title: post.title,
     description: post.description,
-    authors: [{ name: "Ben Gubler", url: "https://bengubler.com" }],
+    authors: [{ name: "Abhishek Baiju", url: "https://glaucusec.tech" }],
     openGraph: {
       title: post.title,
       description: post.description,
       type: "article",
       publishedTime: post.date.toISOString(),
       modifiedTime: post.lastUpdated?.toISOString() || post.date.toISOString(),
-      authors: ["Ben Gubler"],
+      authors: ["Abhishek Baiju"],
       tags: post.tags,
       images: [
         {
@@ -70,7 +70,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: post.title,
       description: post.description,
-      creator: "@bgub_",
+      creator: "@glaucusec",
       images: [ogImageUrl],
     },
   };

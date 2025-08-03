@@ -3,9 +3,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "About Ben Gubler",
+  title: "About Abhishek Baiju",
   description:
-    "Learn more about Ben Gubler, his studies in AI, languages, and his work as a web developer.",
+    "Learn more about Abhishek Baiju, his studies in AI, languages, and his work as a web developer.",
 };
 
 export default function AboutPage() {
@@ -21,29 +21,23 @@ export default function AboutPage() {
 
       <section className="space-y-6 text-lg text-muted-foreground leading-relaxed">
         <p>
-          My name's Ben, but you might know me by my GitHub username,{" "}
+          My name's Abhishek, but you might know me by my GitHub username,{" "}
           <Link
-            href="https://github.com/bgub"
+            href="https://github.com/glaucusec"
             target="_blank"
             rel="noopener noreferrer"
             className="font-medium text-foreground hover:underline"
           >
-            @bgub
+            @glaucusec
           </Link>
           .
         </p>
         <p>
-          I study machine learning and (human) languages. In my free time, I
-          like to build websites and open-source libraries. I'll probably post
-          about all of the above from time to time.
-        </p>
-        <p>
-          I'm currently a student at Brigham Young University in Provo, where
-          I'm pursuing a major in ACME (Applied and Computational Mathematics)
-          and a minor in Arabic. I'm also a research assistant in the PCCL
-          (Perception, Control, and Cognition Lab) at BYU, where I study novel
-          applications of artificial intelligence and Natural Language
-          Processing.
+          I'm a developer focused on building websites and exploring web
+          technologies. My core interest lies at the intersection of web
+          development and web security. I enjoy creating functional, efficient
+          web experiences while continually learning how to make them more
+          secure.
         </p>
       </section>
 
@@ -56,14 +50,16 @@ export default function AboutPage() {
         >
           <ul className="list-disc space-y-3 pl-5 text-lg text-muted-foreground leading-relaxed">
             <li>
-              I'm passionate about language learning — I speak English, Czech,
-              and Slovak, and am currently learning Russian and Arabic.
+              I’ve got a repo that’s basically a starter pack for web security
+              newbies{" "}
+              <a
+                className="underline"
+                href="https://github.com/glaucusec/awesome-repos"
+              >
+                here
+              </a>{" "}
+              — no secret handshakes required.
             </li>
-            <li>
-              I love spending time in the outdoors! Backpacking, fishing, and
-              mountain biking are some of my favorite hobbies.
-            </li>
-            <li>I enjoy great literature, both contemporary and classic!</li>
           </ul>
         </div>
       </section>

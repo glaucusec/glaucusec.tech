@@ -5,9 +5,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Posts - Ben Gubler",
+  title: "Posts - Abhishek Baiju",
   description:
-    "Thoughts on web development, AI, and building things that matter.",
+    " Thoughts on web development, web security, and building things that matter",
 };
 
 interface PostsPageProps {
@@ -81,7 +81,8 @@ export default async function PostsPage({ searchParams }: PostsPageProps) {
           </Link>
         </div>
         <p className="text-lg text-muted-foreground max-w-2xl leading-relaxed">
-          Thoughts on web development, AI, and building things that matter.
+          Thoughts on web development, web security, and building things that
+          matter
         </p>
       </header>
 

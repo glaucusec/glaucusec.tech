@@ -8,17 +8,17 @@ const baseUrl = getBaseUrl();
 
 const createFeed = async (renderToString: Function) => {
   const feed = new Feed({
-    title: "Ben Gubler",
+    title: "Abhishek Baiju",
     description:
-      "Ben Gubler's personal website. Thoughts on web development, AI, and building things that matter.",
+      "Abhishek Baiju's personal website.  Thoughts on web development, web security, and building things that matter",
     id: baseUrl,
     link: baseUrl,
     language: "en",
     favicon: `${baseUrl}/icon.png`,
-    copyright: `Copyright ${new Date().getFullYear()} Ben Gubler`,
+    copyright: `Copyright ${new Date().getFullYear()} Abhishek Baiju`,
     author: {
-      name: "Ben Gubler",
-      email: "hello@bengubler.com",
+      name: "Abhishek Baiju",
+      email: "hello@glaucusec.tech",
       link: baseUrl,
     },
     feedLinks: {
@@ -46,8 +46,8 @@ const createFeed = async (renderToString: Function) => {
         category: post.tags.map((tag) => ({ name: tag })),
         author: [
           {
-            name: "Ben Gubler",
-            email: "hello@bengubler.com",
+            name: "Abhishek Baiju",
+            email: "hello@glaucusec.tech",
             link: baseUrl,
           },
         ],
