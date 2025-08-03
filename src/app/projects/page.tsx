@@ -2,9 +2,9 @@ import { ProjectCard } from "@/components/project-card";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Projects - Ben Gubler",
+  title: "Projects - Abhishek Baiju",
   description:
-    "A collection of Ben Gubler's projects, from featured work to experimental builds.",
+    "A collection of Abhishek Baiju's projects, from featured work to experimental builds.",
 };
 
 const projectsData = [
@@ -18,7 +18,7 @@ const projectsData = [
           "A super-fast embedded JS template engine that supports Deno.",
         tech: ["JavaScript", "TypeScript", "Template Engine"],
         links: {
-          demo: "https://eta.js.org",
+          
           github: "https://github.com/eta-dev/eta",
         },
         image: "eta.png",
@@ -30,8 +30,8 @@ const projectsData = [
           "A website for practicing Czech, Slovak, and Russian noun declensions.",
         tech: ["Next.js", "React", "TypeScript"],
         links: {
-          demo: "https://decline.vercel.app/",
-          github: "https://github.com/bgub/declension-practice",
+          
+          github: "https://github.com/glaucusec/declension-practice",
         },
         image: "decline.png",
       },
@@ -42,8 +42,8 @@ const projectsData = [
           "Pip package with CLI tool to monitor GPU usage across Docker containers. A minimalistic alternative to 'nvidia-smi'.",
         tech: ["Python", "Docker", "CLI"],
         links: {
-          demo: "https://pypi.org/project/gom/",
-          github: "https://github.com/bgub/gom",
+          
+          github: "https://github.com/glaucusec/gom",
         },
         image: "gom.png",
       },
@@ -54,23 +54,22 @@ const projectsData = [
     items: [
       {
         id: "4",
-        title: "npm-to-yarn",
+        title: "BlinkBuy",
         description:
-          "An npm package for converting CLI commands between npm, Yarn, and pnpm.",
-        tech: ["JavaScript", "Node.js", "CLI"],
+          "BlinkBuy- An E-commerce Store ",
+        tech: ["Nextjs", "Tailwind", "React"],
         links: {
-          github: "https://github.com/bgub/npm-to-yarn",
+          github: "https://github.com/glaucusec/BlinkBuy",
         },
         image: "npm-to-yarn.png",
       },
       {
         id: "5",
-        title: "Squirrelly",
+        title: "ClassiMail",
         description:
-          "A lightweight JavaScript template engine with support for helpers, partials, filters, etc. I'm not actively developing it, but this is the project that helped me get into open source.",
-        tech: ["JavaScript", "Template Engine"],
+          "Emails with GPT-4 powered categorization 📧",
+        tech: ["Nextjs", "GPT-4o"],
         links: {
-          demo: "https://squirrelly.js.org",
           github: "https://github.com/squirrellyjs/squirrelly",
         },
         image: "squirrelly.png",
@@ -82,37 +81,27 @@ const projectsData = [
     items: [
       {
         id: "6",
-        title: "Splashpad",
+        title: "Chat Application",
         description:
           "A Chrome extension that turns your new tab page into a customizable dashboard.",
-        tech: ["JavaScript", "Chrome Extension"],
+        tech: ["HTML", "CSS", "Bootstrap", "JavaScript", "Node Js", "Express Js", "MySQL", "Sequelize"],
         links: {
-          demo: "https://chrome.google.com/webstore/detail/splashpad/fainejfmhojphdbbfmpomeknplpdnndb",
+          github: "https://github.com/glaucusec/chat-application",
         },
         image: "splashpad.png",
       },
       {
         id: "7",
-        title: "Esperaboard",
+        title: "Expense Tracker",
         description:
           "A Chrome extension to transform characters written in the Esperanto 'x-system' into Esperanto characters while typing.",
         tech: ["JavaScript", "Chrome Extension"],
         links: {
-          demo: "https://chrome.google.com/webstore/detail/esperaboard-esperanto-x-s/nkgbomaneihlabdhjihdhpdlehahahoc",
+          github: "https://github.com/glaucusec/expense-tracker",
         },
         image: "esperaboard.png",
       },
-      {
-        id: "8",
-        title: "Tic-Tac-Too",
-        description:
-          "AI tic-tac-toe bot built with TensorFlow.js. I built this as a teenager, while just starting to learn about ML, so it's definitely not the best code. But it was a great learning experience.",
-        tech: ["JavaScript", "TensorFlow.js", "AI"],
-        links: {
-          demo: "https://tictactoe.bengubler.com/",
-        },
-        image: "tic-tac-too.png",
-      },
+     
     ],
   },
 ];

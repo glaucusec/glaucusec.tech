@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Post Not Found - Ben Gubler",
+  title: "Post Not Found - Abhishek Baiju",
   description: "The post you're looking for doesn't exist.",
 };
 

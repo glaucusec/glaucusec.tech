@@ -2,7 +2,7 @@ import { getColorByIndex } from "@/lib/colors";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Contact - Ben Gubler",
+  title: "Contact - Abhishek Baiju",
   description:
     "Get in touch with me for collaborations, questions, or just to say hello.",
 };
@@ -11,26 +11,26 @@ export default function ContactPage() {
   const contactMethods = [
     {
       name: "Email",
-      value: "hello [at] bengubler [dot] com",
+      value: "abhishekbaiju [at] pm [dot] me",
       href: null,
       description: "Best for business inquiries and longer conversations",
     },
     {
       name: "X (Twitter)",
-      value: "@bgub_",
-      href: "https://x.com/bgub_",
+      value: "@glaucusec",
+      href: "https://x.com/glaucusec",
       description: "Follow me for quick updates and tech discussions",
     },
     {
       name: "LinkedIn",
-      value: "Ben Gubler",
-      href: "https://www.linkedin.com/in/ben-gubler/",
+      value: "Abhishek Baiju",
+      href: "https://www.linkedin.com/in/abhishekbaiju/",
       description: "Professional network and career-related discussions",
     },
     {
       name: "GitHub",
-      value: "bgub",
-      href: "https://github.com/bgub",
+      value: "glaucusec",
+      href: "https://github.com/glaucusec",
       description: "Check out my open source projects and contributions",
     },
   ];

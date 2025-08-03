@@ -6,7 +6,7 @@ export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
 
-    const title = searchParams.get("title") || "Ben Gubler";
+    const title = searchParams.get("title") || "Abhishek Baiju";
     const description =
       searchParams.get("description") ||
       "Open-source developer, student in ML, and aspiring polyglot. Creator of Eta and Squirrelly.";
@@ -64,7 +64,7 @@ export async function GET(request: Request) {
                 marginBottom: "8px",
               }}
             >
-              bengubler.com
+              glaucusec.tech
             </div>
             <div
               style={{

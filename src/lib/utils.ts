@@ -14,5 +14,5 @@ export const getBaseUrl = () => {
   }
 
   // Fallback in case NEXT_PUBLIC_URL isn't set for some reason
-  return "https://www.bengubler.com";
+  return "https://www.glaucusec.tech";
 };

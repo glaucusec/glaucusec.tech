@@ -11,7 +11,7 @@ export function Comments() {
   return (
     <div className="mt-10">
       <Giscus
-        repo="bgub/bengubler.com"
+        repo="glaucusec/glaucusec.tech"
         repoId="R_kgDOMDxe6w"
         category="Comments"
         categoryId="DIC_kwDOMDxe684CrcJf"

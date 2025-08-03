@@ -1,4 +1,4 @@
-# bengubler.com
+# glaucusec.tech
 
 Welcome to my personal website!
 

@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 // Image metadata
-export const alt = "Ben Gubler - Web Developer";
+export const alt = "Abhishek Baiju - Web Developer";
 export const size = {
   width: 1200,
   height: 630,
@@ -62,7 +62,7 @@ export default async function Image() {
               marginBottom: "8px",
             }}
           >
-            bengubler.com
+            glaucusec.tech
           </div>
           <div
             style={{
@@ -105,7 +105,7 @@ export default async function Image() {
               WebkitTextFillColor: "transparent",
             }}
           >
-            Ben Gubler
+            Abhishek Baiju
           </h1>
 
           {/* Description */}

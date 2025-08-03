@@ -19,13 +19,13 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Ben Gubler",
-    template: "%s - Ben Gubler",
+    default: "Abhishek Baiju",
+    template: "%s - Abhishek Baiju",
   },
   description:
-    "Ben Gubler's personal website. Web Development Intern at Vercel, studying AI and human languages at BYU. Thoughts on web development, AI, and building things that matter.",
+    "Abhishek Baiju's personal website. Web Development Intern at Vercel, studying AI and human languages at BYU. Thoughts on web development, web security, and building things that matter.",
   keywords: [
-    "Ben Gubler",
+    "Abhishek Baiju",
     "web developer",
     "Vercel",
     "Next.js",
@@ -35,25 +35,25 @@ export const metadata: Metadata = {
     "machine learning",
     "BYU",
   ],
-  authors: [{ name: "Ben Gubler", url: "https://bengubler.com" }],
-  creator: "Ben Gubler",
-  publisher: "Ben Gubler",
-  metadataBase: new URL("https://bengubler.com"),
+  authors: [{ name: "Abhishek Baiju", url: "https://glaucusec.tech" }],
+  creator: "Abhishek Baiju",
+  publisher: "Abhishek Baiju",
+  metadataBase: new URL("https://glaucusec.tech"),
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://bengubler.com",
-    title: "Ben Gubler",
+    url: "https://glaucusec.tech",
+    title: "Abhishek Baiju",
     description:
-      "Ben Gubler's personal website. Web Development Intern at Vercel, studying AI and human languages at BYU.",
-    siteName: "Ben Gubler",
+      "Abhishek Baiju's personal website. Web Development Intern at Vercel, studying AI and human languages at BYU.",
+    siteName: "Abhishek Baiju",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ben Gubler",
+    title: "Abhishek Baiju",
     description:
-      "Ben Gubler's personal website. Web Development Intern at Vercel, studying AI and human languages at BYU.",
-    creator: "@bgub_",
+      "Abhishek Baiju's personal website. Web Development Intern at Vercel, studying AI and human languages at BYU.",
+    creator: "@glaucusec",
   },
   robots: {
     index: true,
@@ -97,7 +97,7 @@ export default function RootLayout({
                       <Link href="/" className="flex items-center space-x-3">
                         <div className="relative w-8 h-8 rounded-full overflow-hidden ring-2 ring-border/20">
                           <Image
-                            src="/bengubler.jpg"
+                            src="/abhishekbaiju.jpg"
                             alt="Profile photo"
                             width={32}
                             height={32}
@@ -106,7 +106,7 @@ export default function RootLayout({
                           />
                         </div>
                         <span className="text-lg font-semibold">
-                          Ben Gubler
+                          Abhishek Baiju
                         </span>
                       </Link>
                       <MobileNav />

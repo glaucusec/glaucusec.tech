@@ -32,14 +32,14 @@ export default function HomePage() {
         <div className="space-y-8">
           <div className="space-y-4">
             <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
-              Hello! Ahoj! Привет! مرحبا! 👋
+              Hello! Namaste! 👋
             </h1>
             <div className="flex items-center space-x-3">
               <Badge className="text-xs px-2 py-1 rounded-md bg-blue-50 text-blue-700 border border-blue-200 hover:bg-blue-100 dark:bg-blue-950/30 dark:text-blue-400 dark:border-blue-800/30">
-                Currently interning @ Vercel
+                Currently building and breaking
               </Badge>
               <Link
-                href="https://github.com/bgub"
+                href="https://github.com/glaucusec"
                 className="text-muted-foreground hover:text-foreground transition-colors"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -48,7 +48,7 @@ export default function HomePage() {
                 <span className="sr-only">GitHub</span>
               </Link>
               <Link
-                href="https://x.com/bgub_"
+                href="https://x.com/glaucusec"
                 className="text-muted-foreground hover:text-foreground transition-colors"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -60,32 +60,33 @@ export default function HomePage() {
           </div>
           <div className="space-y-6">
             <p className="text-lg text-muted-foreground leading-relaxed">
-              I'm Ben (or on GitHub,{" "}
+              I'm Abhishek (or on GitHub,{" "}
               <Link
-                href="https://github.com/bgub"
+                href="https://github.com/glaucusec"
                 className="text-foreground hover:underline font-medium"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                @bgub
+                @glaucusec
               </Link>
               ).
             </p>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              I study AI and (human) languages. In my free time, I like to build
-              websites and open-source libraries. I'm currently studying ACME
-              (Applied and Computational Mathematics) and Arabic at BYU, while
-              interning at Vercel building the future of the web.
+              I'm a developer focused on building websites and exploring web
+              technologies. My core interest lies at the intersection of web
+              development and web security. I enjoy creating functional,
+              efficient web experiences while continually learning how to make
+              them more secure.
             </p>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              Feel free to take a look at my{" "}
-              <Link
+            {/* <p className="text-lg text-muted-foreground leading-relaxed">
+              Feel free to take a look at{" "} */}
+            {/* <Link
                 href="/resume"
                 className="text-foreground hover:underline font-medium"
               >
                 résumé
-              </Link>
-              , some of the{" "}
+              </Link> */}
+            {/* some of the{" "}
               <Link
                 href="/projects"
                 className="text-foreground hover:underline font-medium"
@@ -94,14 +95,13 @@ export default function HomePage() {
               </Link>{" "}
               I've worked on, or the{" "}
               <Link
-                href="/language-learning"
+                href="/posts"
                 className="text-foreground hover:underline font-medium"
               >
-                language learning materials
+                blogs
               </Link>{" "}
-              I've created. Otherwise you can check out some of my recent blog
-              posts below!
-            </p>
+              I've written.
+            </p> */}
           </div>
         </div>
       </section>
@@ -124,7 +124,8 @@ export default function HomePage() {
             )}
           </div>
           <p className="text-lg text-muted-foreground max-w-2xl leading-relaxed">
-            Thoughts on web development, AI, and building things that matter.
+            Thoughts on web development, web security, and building things that
+            matter.
           </p>
         </div>
         <div className="@container">
@@ -137,7 +138,7 @@ export default function HomePage() {
       </section>
 
       {/* Featured Projects Section */}
-      <section>
+      {/* <section>
         <div className="space-y-4 mb-6 md:mb-8">
           <div className="flex items-center justify-between">
             <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
@@ -162,7 +163,7 @@ export default function HomePage() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 }

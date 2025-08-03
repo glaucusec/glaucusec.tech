@@ -20,7 +20,7 @@ const featuredProjectsData = [
     tech: ["Next.js", "React", "TypeScript"],
     links: {
       demo: "https://decline.vercel.app/",
-      github: "https://github.com/bgub/declension-practice",
+      github: "https://github.com/glaucusec/declension-practice",
     },
     image: "decline.png",
   },
@@ -32,7 +32,7 @@ const featuredProjectsData = [
     tech: ["Python", "Docker", "CLI"],
     links: {
       demo: "https://pypi.org/project/gom/",
-      github: "https://github.com/bgub/gom",
+      github: "https://github.com/glaucusec/gom",
     },
     image: "gom.png",
   },

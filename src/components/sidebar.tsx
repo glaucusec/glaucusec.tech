@@ -24,14 +24,7 @@ const navigation = [
     isSubItem: true,
     parent: "About",
   },
-  { name: "Projects", href: "/projects", icon: FolderOpen },
-  {
-    name: "Language Learning",
-    href: "/language-learning",
-    icon: Languages,
-    isSubItem: true,
-    parent: "Projects",
-  },
+  // { name: "Projects", href: "/projects", icon: FolderOpen },
   { name: "Posts", href: "/posts", icon: FileText },
   { name: "Contact", href: "/contact", icon: Mail },
 ];
@@ -47,7 +40,7 @@ export function Sidebar() {
           <Link href="/" className="flex items-start space-x-3 group">
             <div className="relative w-12 h-12 rounded-full overflow-hidden ring-2 ring-border/20 group-hover:ring-border/40 transition-all">
               <Image
-                src="/bengubler.jpg"
+                src="/abhishekbaiju.jpg"
                 alt="Profile photo"
                 width={48}
                 height={48}
@@ -57,10 +50,10 @@ export function Sidebar() {
             </div>
             <div className="space-y-1 min-w-0 flex-1">
               <h2 className="text-lg font-semibold text-foreground group-hover:text-foreground/80 transition-colors">
-                Ben Gubler
+                Abhishek Baiju
               </h2>
               <p className="text-sm text-muted-foreground group-hover:text-muted-foreground/80 transition-colors">
-                @bgub
+                @glaucusec
               </p>
             </div>
           </Link>
