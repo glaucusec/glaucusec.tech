@@ -14,11 +14,11 @@ const createFeed = async (renderToString: Function) => {
     id: baseUrl,
     link: baseUrl,
     language: "en",
-    favicon: `${baseUrl}/icon.png`,
+    // favicon: `${baseUrl}/icon.png`,
     copyright: `Copyright ${new Date().getFullYear()} Abhishek Baiju`,
     author: {
       name: "Abhishek Baiju",
-      email: "hello@glaucusec.tech",
+      email: "abhishekbaiju@pm.me",
       link: baseUrl,
     },
     feedLinks: {
@@ -47,7 +47,7 @@ const createFeed = async (renderToString: Function) => {
         author: [
           {
             name: "Abhishek Baiju",
-            email: "hello@glaucusec.tech",
+            email: "abhishekbaiju@pm.me",
             link: baseUrl,
           },
         ],
