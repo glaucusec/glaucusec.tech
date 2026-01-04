@@ -13,6 +13,7 @@ import type { Metadata } from "next";
 import { Link } from "next-view-transitions";
 import { notFound } from "next/navigation";
 
+import { getBaseUrl } from "@/lib/utils";
 import { ClientTOC } from "./client-toc";
 
 // Generate static params for all posts
@@ -108,8 +109,30 @@ export default async function PostPage({
     day: "numeric",
   });
 
+  // JSON-LD for better SEO
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.title,
+    description: post.description,
+    image: [`${getBaseUrl()}/og?title=${encodeURIComponent(post.title)}&description=${encodeURIComponent(post.description)}&type=post`],
+    datePublished: post.date.toISOString(),
+    dateModified: post.lastUpdated?.toISOString() || post.date.toISOString(),
+    author: [
+      {
+        "@type": "Person",
+        name: "Abhishek Baiju",
+        url: getBaseUrl(),
+      },
+    ],
+  };
+
   return (
     <div className="space-y-8">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <header className="space-y-4">
         <nav className="text-sm text-muted-foreground">
           <Link
