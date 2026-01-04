@@ -64,7 +64,7 @@ export async function GET(request: Request) {
                 marginBottom: "8px",
               }}
             >
-              glaucusec.tech
+              glaucusec.com
             </div>
             <div
               style={{

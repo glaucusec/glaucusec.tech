@@ -118,11 +118,9 @@
   }
   body {
     @apply bg-background text-foreground;
-    scrollbar-gutter: stable;
+    /* scrollbar-gutter: stable; */
   }
-  html {
-    scrollbar-gutter: stable;
-  }
+
 }
 
 @layer base {

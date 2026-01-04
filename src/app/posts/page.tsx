@@ -7,7 +7,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Posts - Abhishek Baiju",
   description:
-    " Thoughts on web development, web security, and building things that matter",
+    "Thoughts on web development, web security, and building things that matter",
 };
 
 interface PostsPageProps {

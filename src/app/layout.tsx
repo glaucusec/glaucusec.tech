@@ -1,5 +1,4 @@
-import { MobileNav } from "@/components/mobile-nav";
-import { Sidebar } from "@/components/sidebar";
+import { MobileNav } from "@/components/nav/mobile-nav";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -10,6 +9,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type React from "react";
 import "./globals.css";
+import { Navbar } from "@/components/nav/navbar";
 
 const inter = Inter({ subsets: ["latin"] });
 const geistMono = Geist_Mono({
@@ -35,14 +35,14 @@ export const metadata: Metadata = {
     "machine learning",
     "BYU",
   ],
-  authors: [{ name: "Abhishek Baiju", url: "https://glaucusec.tech" }],
+  authors: [{ name: "Abhishek Baiju", url: "https://glaucusec.com" }],
   creator: "Abhishek Baiju",
   publisher: "Abhishek Baiju",
-  metadataBase: new URL("https://glaucusec.tech"),
+  metadataBase: new URL("https://glaucusec.com"),
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://glaucusec.tech",
+    url: "https://glaucusec.com",
     title: "Abhishek Baiju",
     description:
       "Abhishek Baiju's personal website. Web Development Intern at Vercel, studying AI and human languages at BYU.",
@@ -84,13 +84,13 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             {/* Outermost wrapper for max-width and centering */}
-            <div className="w-full max-w-screen-xl mx-auto bg-background">
-              <div className="flex min-h-screen">
-                {/* Desktop Sidebar */}
-                <Sidebar />
+            <div className="w-full max-w-5xl mx-auto bg-background">
+              <div className="flex flex-col min-h-screen">
+                {/* Desktop Navbar */}
+                <Navbar />
 
                 {/* Main Content Area */}
-                <div className="flex-1 md:ml-64 flex flex-col">
+                <div className="flex-1 flex flex-col">
                   {/* Mobile Header */}
                   <header className="sticky top-0 z-40 md:hidden border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
                     <div className="flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">

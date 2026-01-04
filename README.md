@@ -1,4 +1,4 @@
-# glaucusec.tech
+# glaucusec.com
 
 Welcome to my personal website!
 
