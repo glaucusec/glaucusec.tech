@@ -59,7 +59,7 @@ const HackerNewsIcon = ({ className }: { className?: string }) => (
 
 export function Social({ title, className }: SocialProps) {
   const pathname = usePathname();
-  const currentUrl = `https://glaucusec.tech${pathname}`;
+  const currentUrl = `https://glaucusec.com${pathname}`;
   const encodedTitle = encodeURIComponent(title);
   const encodedUrl = encodeURIComponent(currentUrl);
 

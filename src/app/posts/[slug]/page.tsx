@@ -48,7 +48,7 @@ export async function generateMetadata({
   return {
     title: post.title,
     description: post.description,
-    authors: [{ name: "Abhishek Baiju", url: "https://glaucusec.tech" }],
+    authors: [{ name: "Abhishek Baiju", url: "https://glaucusec.com" }],
     openGraph: {
       title: post.title,
       description: post.description,

@@ -63,7 +63,7 @@ const posts = defineCollection({
     // Generate clean slug without folder prefixes (posts/, microblog/, etc.)
     const fileName =
       document._meta.path
-        .split("/")
+        .split(/[\\/]/)
         .pop()
         ?.replace(/\.mdx$/, "") || "";
 
@@ -75,8 +75,8 @@ const posts = defineCollection({
       slug: fileName,
       url: `/posts/${fileName}`,
       // Keep folder info for potential categorization
-      folder: document._meta.path.includes("/")
-        ? document._meta.path.split("/")[0]
+      folder: document._meta.path.match(/[\\/]/)
+        ? document._meta.path.split(/[\\/]/)[0]
         : null,
     };
   },

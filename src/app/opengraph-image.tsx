@@ -62,7 +62,7 @@ export default async function Image() {
               marginBottom: "8px",
             }}
           >
-            glaucusec.tech
+            glaucusec.com
           </div>
           <div
             style={{
