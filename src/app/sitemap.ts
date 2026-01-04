@@ -22,9 +22,6 @@ export default async function sitemap() {
     "/contact",
     "/projects",
     "/posts",
-    "/language-learning",
-    "/language-learning/czech-declensions",
-    "/language-learning/russian-declensions",
   ].map((url) => ({
     url: `${baseUrl}${url}`,
     lastModified: new Date(),
