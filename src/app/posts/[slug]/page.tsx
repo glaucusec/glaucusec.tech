@@ -115,7 +115,11 @@ export default async function PostPage({
     "@type": "Article",
     headline: post.title,
     description: post.description,
-    image: [`${getBaseUrl()}/og?title=${encodeURIComponent(post.title)}&description=${encodeURIComponent(post.description)}&type=post`],
+    image: [
+      `${getBaseUrl()}/og?title=${encodeURIComponent(
+        post.title
+      )}&description=${encodeURIComponent(post.description)}&type=post`,
+    ],
     datePublished: post.date.toISOString(),
     dateModified: post.lastUpdated?.toISOString() || post.date.toISOString(),
     author: [
@@ -190,7 +194,6 @@ export default async function PostPage({
                           year: "numeric",
                           month: "short",
                           day: "numeric",
-                          month: "short",
                         })}
                       </span>
                     </>
