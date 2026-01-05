@@ -39,6 +39,8 @@ export const tocPlugin: Plugin = (): Transformer => {
 
     visit(tree, "heading", (node: HeadingNode) => {
       const { depth } = node;
+      // Filter out deep headings (H4+) to keep TOC clean, matching user preference
+      if (depth > 3) return;
       const title = extractText(node);
 
       const newItem: TOCNode = {
@@ -49,33 +51,21 @@ export const tocPlugin: Plugin = (): Transformer => {
         children: [],
       };
 
-      if (depth === 1) {
-        toc.children.push(newItem);
-      } else {
-        let parent = findParent(toc, depth - 1);
-        if (parent) {
-          parent.children.push(newItem);
+      // Find the correct parent by traversing down the last children
+      let parent = toc;
+      while (true) {
+        const lastChild = parent.children[parent.children.length - 1];
+        if (lastChild && lastChild.depth && lastChild.depth < depth) {
+          parent = lastChild;
         } else {
-          toc.children.push(newItem); // Fallback in case no parent is found
+          break;
         }
       }
+
+      parent.children.push(newItem);
     });
 
     // Attach the TOC to the file's data property
     file.data.toc = toc;
   };
 };
-
-function findParent(node: TOCNode, depth: number): TOCNode | null {
-  if (node.depth === depth) {
-    return node;
-  }
-  for (let child of node.children) {
-    const found = findParent(child, depth);
-    if (found) {
-      return found;
-    }
-  }
-
-  return null;
-}

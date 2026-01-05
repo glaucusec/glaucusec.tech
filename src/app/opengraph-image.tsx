@@ -71,7 +71,7 @@ export default async function Image() {
               fontWeight: "500",
             }}
           >
-            Hello! Ahoj! Привет!
+            Hello!
           </div>
         </div>
 

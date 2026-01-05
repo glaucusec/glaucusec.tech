@@ -133,119 +133,10 @@ export default async function PostPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <header className="space-y-4">
-        <nav className="text-sm text-muted-foreground">
-          <Link
-            href="/posts"
-            className="hover:text-foreground transition-colors"
-          >
-            Posts
-          </Link>
-          <span className="mx-2">›</span>
-          <span>{post.title}</span>
-        </nav>
-
-        {/* Styled Post Header */}
-        <div
-          className={`${colors.bg} ${colors.border} border rounded-lg shadow-sm transition-all duration-300 hover:shadow-lg`}
-          style={getTransitionStyle(post.url, "post-card-")}
-        >
-          <div className="p-6 space-y-3">
-            <div className="flex items-center gap-4 text-xs text-muted-foreground font-mono">
-              <time
-                dateTime={post.date.toISOString()}
-                style={getTransitionStyle(post.url, "date-")}
-              >
-                {formattedDate}
-              </time>
-              <span>•</span>
-              <span style={getTransitionStyle(post.url, "reading-time-")}>
-                {(post as any).readingTime || "5 min read"}
-              </span>
-              {post.lastUpdated && (
-                <>
-                  <span>•</span>
-                  <span>
-                    Updated{" "}
-                    {post.lastUpdated.toLocaleDateString("en-US", {
-                      year: "numeric",
-                      month: "short",
-                      day: "numeric",
-                    })}
-                  </span>
-                </>
-              )}
-            </div>
-            <h1
-              className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl leading-tight group-hover:text-foreground/90 transition-colors break-words"
-              style={getTransitionStyle(post.url, "title-")}
-            >
-              {post.title}
-              {post.archived && (
-                <span className="text-muted-foreground"> (archived)</span>
-              )}
-            </h1>
-          </div>
-          <div className="px-6 pb-6 space-y-4">
-            <p
-              className="text-lg leading-relaxed text-muted-foreground max-w-3xl break-words"
-              style={getTransitionStyle(post.url, "description-")}
-            >
-              {post.description}
-            </p>
-            {post.tags.length > 0 && (
-              <div className="flex flex-wrap gap-1.5">
-                {post.tags.map((tag) => (
-                  <Badge
-                    key={tag}
-                    variant="outline"
-                    className="text-xs px-2 py-0.5 bg-background/60 hover:bg-background/80 transition-colors"
-                    style={getTransitionStyle(`${post.url}-${tag}`, `tag-`)}
-                  >
-                    #{tag.toLowerCase()}
-                  </Badge>
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
-      </header>
-
-      {/* Mobile TOC and Raw Markdown - Show before content on mobile */}
-      <div className="lg:hidden space-y-4">
-        {hasTOC && (
-          <div className="bg-card border rounded-lg p-4">
-            <ClientTOC tree={toc} />
-          </div>
-        )}
-        <div className="bg-card border rounded-lg p-4">
-          <RawMarkdown slug={post.slug} content={post.content} />
-        </div>
-      </div>
-
-      {/* Main Content */}
-      <div className="grid lg:grid-cols-[1fr_250px] gap-8">
-        <main className="min-w-0">
-          <Typography className="text-lg">
-            <MDXContent code={post.mdx} components={mdxComponents} />
-          </Typography>
-
-          {/* Mobile Social - Show after content on mobile */}
-          <div className="lg:hidden mt-8">
-            <div className="bg-card border rounded-lg p-4">
-              <Social title={post.title} />
-            </div>
-          </div>
-
-          {/* Comments */}
-          <div className="mt-12 pt-8 border-t">
-            <Comments />
-          </div>
-        </main>
-
+      <div className="grid lg:grid-cols-[250px_1fr] gap-8 items-start">
         {/* Desktop TOC, Social, and Raw Markdown - Show on desktop only */}
-        <aside className="hidden lg:block">
-          <div className="sticky top-24 space-y-6">
+        <aside className="hidden lg:block sticky top-24">
+          <div className="space-y-6">
             {hasTOC && (
               <div className="bg-card border rounded-lg p-4">
                 <ClientTOC tree={toc} />
@@ -259,6 +150,117 @@ export default async function PostPage({
             </div>
           </div>
         </aside>
+
+        <div className="min-w-0 space-y-8">
+          <header className="space-y-4">
+            <nav className="text-sm text-muted-foreground">
+              <Link
+                href="/posts"
+                className="hover:text-foreground transition-colors"
+              >
+                Posts
+              </Link>
+              <span className="mx-2">›</span>
+              <span>{post.title}</span>
+            </nav>
+
+            {/* Styled Post Header */}
+            <div
+              className={`${colors.bg} ${colors.border} border rounded-lg shadow-sm transition-all duration-300 hover:shadow-lg`}
+              style={getTransitionStyle(post.url, "post-card-")}
+            >
+              <div className="p-6 space-y-3">
+                <div className="flex items-center gap-4 text-xs text-muted-foreground font-mono">
+                  <time
+                    dateTime={post.date.toISOString()}
+                    style={getTransitionStyle(post.url, "date-")}
+                  >
+                    {formattedDate}
+                  </time>
+                  <span>•</span>
+                  <span style={getTransitionStyle(post.url, "reading-time-")}>
+                    {(post as any).readingTime || "5 min read"}
+                  </span>
+                  {post.lastUpdated && (
+                    <>
+                      <span>•</span>
+                      <span>
+                        Updated{" "}
+                        {post.lastUpdated.toLocaleDateString("en-US", {
+                          year: "numeric",
+                          month: "short",
+                          day: "numeric",
+                          month: "short",
+                        })}
+                      </span>
+                    </>
+                  )}
+                </div>
+                <h1
+                  className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl leading-tight group-hover:text-foreground/90 transition-colors break-words"
+                  style={getTransitionStyle(post.url, "title-")}
+                >
+                  {post.title}
+                  {post.archived && (
+                    <span className="text-muted-foreground"> (archived)</span>
+                  )}
+                </h1>
+              </div>
+              <div className="px-6 pb-6 space-y-4">
+                <p
+                  className="text-lg leading-relaxed text-muted-foreground max-w-3xl break-words"
+                  style={getTransitionStyle(post.url, "description-")}
+                >
+                  {post.description}
+                </p>
+                {post.tags.length > 0 && (
+                  <div className="flex flex-wrap gap-1.5">
+                    {post.tags.map((tag) => (
+                      <Badge
+                        key={tag}
+                        variant="outline"
+                        className="text-xs px-2 py-0.5 bg-background/60 hover:bg-background/80 transition-colors"
+                        style={getTransitionStyle(`${post.url}-${tag}`, `tag-`)}
+                      >
+                        #{tag.toLowerCase()}
+                      </Badge>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          </header>
+
+          {/* Mobile TOC and Raw Markdown - Show before content on mobile */}
+          <div className="lg:hidden space-y-4">
+            {hasTOC && (
+              <div className="bg-card border rounded-lg p-4">
+                <ClientTOC tree={toc} />
+              </div>
+            )}
+            <div className="bg-card border rounded-lg p-4">
+              <RawMarkdown slug={post.slug} content={post.content} />
+            </div>
+          </div>
+
+          <main className="min-w-0">
+            <Typography className="text-lg">
+              <MDXContent code={post.mdx} components={mdxComponents} />
+            </Typography>
+
+            {/* Mobile Social - Show after content on mobile */}
+            <div className="lg:hidden mt-8">
+              <div className="bg-card border rounded-lg p-4">
+                <Social title={post.title} />
+              </div>
+            </div>
+
+            {/* Comments */}
+            <div className="mt-12 pt-8 border-t">
+              <Comments />
+            </div>
+          </main>
+        </div>
       </div>
 
       {/* Floating ELI5 Button */}
