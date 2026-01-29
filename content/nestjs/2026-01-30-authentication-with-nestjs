@@ -1,0 +1,209 @@
+---
+title: "I Spent 4 Hours Fighting Auth Libraries so You Don’t Have To: Guide to NestJS Authentication"
+description: "Authentication is where most NestJS projects start to feel fragile. This guide walks through building secure auth system with Passport, JWT, and Prisma—without black-box libraries, hidden magic, or brittle setups.
+date: "2026-01-30"
+tags: [nestjs, authentication, jwt, passportjs, prisma, backend]
+---
+
+Let’s be real for a second. Authentication is the feature every developer dreads starting. It’s not because it’s hard—it’s because there are a million ways to do it, and half of them break when you look at them wrong.
+
+I recently started a new project and I wanted to use the latest and greatest tools: NestJS, Prisma, and the new cool kid on the block, Better Auth.
+
+It was a disaster.
+
+I ran into persistent 404 errors, compatibility issues with Express 5, and "Cannot GET /session" errors that wouldn't go away no matter how many times I tweaked the main.ts file. I realized I was spending more time fighting the library than building my actual product.
+
+So, I nuked it. 💥
+
+## The Stack
+
+Framework: NestJS
+
+Database: PostgreSQL + Prisma
+
+Security: Passport, Bcrypt, JWT
+
+## Step 1: The Clean Slate
+
+First, let's install the standard, battle-tested packages. No experimental stuff here.
+
+```typescript
+npm install @nestjs/passport passport passport-local passport-jwt @nestjs/jwt bcrypt class-validator class-transformer
+
+npm install -D @types/passport-local @types/passport-jwt @types/bcrypt
+```
+
+## Step 2: The Database Schema (Prisma)
+
+We need to store users, but here is the pro tip: Store the hashed refresh token. If you only store the Access Token, you can't revoke access if a user gets hacked. By storing a hashed refresh token, we can "kill" a session instantly by just deleting one string from the DB.
+
+```typescript
+// prisma/schema.prisma
+
+model User {
+  id                 String   @id @default(cuid())
+  email              String   @unique
+  password           String
+  name               String?
+  role               Role     @default(VIEWER)
+
+  // The secret sauce for secure sessions
+  hashedRefreshToken String?
+
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
+
+enum Role {
+  ADMIN
+  EDITOR
+  VIEWER
+}
+```
+
+**Run your migration**: npx prisma migrate dev --name init_auth
+
+## Step 3: The Secret Sauce (Refresh Token Logic)
+
+Most tutorials stop at jwtService.sign(). That's fine for a hackathon, but bad for production. We need two secrets in our .env file:
+
+```typescript
+JWT_SECRET = "something_short_and_secret";
+JWT_REFRESH_SECRET = "something_very_long_and_different_secret";
+```
+
+### The Service
+
+In src/auth/auth.service.ts, we handle the heavy lifting. I implemented a generateTokens method that creates both keys at once.
+
+```typescript
+// src/auth/auth.service.ts
+@Injectable()
+export class AuthService {
+  constructor(
+    private prisma: PrismaService,
+    private jwtService: JwtService,
+    private configService: ConfigService,
+  ) {}
+
+  // 1. Generate the Pair
+  private async generateTokens(userId: string, email: string, role: string) {
+    const payload = { sub: userId, email, role };
+
+    const [accessToken, refreshToken] = await Promise.all([
+      this.jwtService.signAsync(payload, {
+        expiresIn: "15m", // Short life for security
+        secret: this.configService.get("JWT_SECRET"),
+      }),
+      this.jwtService.signAsync(payload, {
+        expiresIn: "7d", // Long life for convenience
+        secret: this.configService.get("JWT_REFRESH_SECRET"),
+      }),
+    ]);
+
+    return { accessToken, refreshToken };
+  }
+
+  // 2. The "Refresh" Handshake
+  async refreshTokens(refreshToken: string) {
+    // Verify the token using the SPECIAL refresh secret
+    const payload = await this.jwtService.verifyAsync(refreshToken, {
+      secret: this.configService.get("JWT_REFRESH_SECRET"),
+    });
+
+    // Check if user exists AND if the token matches the DB hash
+    const user = await this.prisma.user.findUnique({
+      where: { id: payload.sub },
+    });
+    if (!user || !user.hashedRefreshToken)
+      throw new ForbiddenException("Access Denied");
+
+    const isMatch = await bcrypt.compare(refreshToken, user.hashedRefreshToken);
+    if (!isMatch) throw new ForbiddenException("Access Denied");
+
+    // If all good, rotate tokens!
+    const tokens = await this.generateTokens(user.id, user.email, user.role);
+    await this.updateRefreshToken(user.id, tokens.refreshToken);
+
+    return tokens;
+  }
+
+  // ... (register, login, and logout logic goes here)
+}
+```
+
+> In real-world apps, refresh tokens should be stored in HttpOnly cookies, not request bodies.
+
+## Step 4: The "Magic" Guard
+
+This is my favorite part of NestJS. We create a Strategy that automatically intercepts every request, checks the header, and attaches the User to the request object.
+
+```typescript
+// src/auth/jwt.strategy.ts
+@Injectable()
+export class JwtStrategy extends PassportStrategy(Strategy, "jwt") {
+  constructor(configService: ConfigService) {
+    super({
+      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+      ignoreExpiration: false,
+      secretOrKey: configService.get("JWT_SECRET"),
+    });
+  }
+
+  async validate(payload: any) {
+    // This simple return attaches `req.user` to every controller!
+    return { id: payload.sub, email: payload.email, role: payload.role };
+  }
+}
+```
+
+## Step 5: The API Structure
+
+Here is what our final Controller looks like. It’s clean, readable, and handles the full lifecycle.
+
+```typescript
+@Controller("auth")
+export class AuthController {
+  // Public Routes
+  @Post("signup")
+  signup(@Body() dto: RegisterDto) {
+    return this.authService.register(dto);
+  }
+
+  @Post("login")
+  login(@Body() dto: LoginDto) {
+    return this.authService.login(dto);
+  }
+
+  // Protected Routes
+  @UseGuards(JwtAuthGuard)
+  @Get("me")
+  getProfile(@Request() req) {
+    // The frontend calls this on page load to restore session
+    return this.authService.getCurrentUser(req.user.id);
+  }
+
+  @Post("refresh")
+  refresh(@Body() body) {
+    // Called silently when Access Token expires
+    return this.authService.refreshTokens(body.refreshToken);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Post("logout")
+  logout(@Request() req) {
+    // Kills the session in the DB
+    return this.authService.logout(req.user.id);
+  }
+}
+```
+
+## Why This is Better
+
+- Control: No black-box libraries. If something breaks, I can console.log it.
+
+- Scalability: The /me endpoint allows the UI to stay stateless but persistent.
+
+- Security: By hashing the refresh token, even a database leak doesn't expose valid tokens directly.
+
+- No 404s: It just works.
